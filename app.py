@@ -29,6 +29,7 @@ if __name__ == "__main__":
         print("Usage: python app.py <block_number>")
         sys.exit(1)
     block_number = int(sys.argv[1])
+    start_time = time.time()  # ⏱️ Start timer
     print("⛓️  Fetching block data from Ethereum...")
     block_data = get_block_data(block_number)
     proof = pseudo_zk_hash(block_data)
@@ -37,3 +38,5 @@ if __name__ == "__main__":
     print(f"Transaction Count: {block_data['transactions']}")
     print(f"🧩 ZK-Soundness Proof (SHA-256): {proof}")
     print("✅ Data integrity confirmed — block proof generated successfully.")
+    print(f"⏱️  Elapsed time: {time.time() - start_time:.2f} seconds")  # ⏱️ End timer
+

@@ -4,6 +4,16 @@ import json
 import hashlib
 import sys
 import time
+def get_network_name(chain_id):
+    networks = {
+        1: "Ethereum Mainnet",
+        5: "Goerli Testnet",
+        11155111: "Sepolia Testnet",
+        137: "Polygon Mainnet",
+        10: "Optimism",
+        42161: "Arbitrum One",
+    }
+    return networks.get(chain_id, f"Unknown (chain ID {chain_id})")
 
 RPC_URL = "https://mainnet.infura.io/v3/your_api_key"
 
@@ -16,6 +26,7 @@ def get_block_data(block_number):
     if not w3.is_connected():
         print("❌ Connection to RPC failed.")
         sys.exit(1)
+        print("🌐 Connected to:", get_network_name(w3.eth.chain_id))
     block = w3.eth.get_block(block_number)
     data = {
         "blockNumber": block.number,
